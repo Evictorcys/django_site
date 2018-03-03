@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+{% block title %}About Me{% endblock %}
+{% block subtitle %}About Me{% endblock %}
+
+{% block content %}
+<div class="container about">
+	<h1>Hello, My name is <span class="about-bold">  Evictor Cai</span></h1>
+	<p>I am an IT developer focusing on web technology and a machine learning. </p>
+	<p>I graduated from Beijing University of Posts and Telecommunications in 2017.</p>
+	<p>In spare time, I like reading book, surfing internet, watching movie and playing Dota2.</p>
+	<div class="about-button">
+		<a class="btn btn-xlarge btn-clean-one" href="{% url "blog:contact_me" %}">Contact Me</a>
+	</div>
+	<hr>
+</div>
+{% endblock %}
+
+
+    

@@ -1,0 +1,105 @@
+{% extends "blog/base.html" %}
+{% load staticfiles %}
+{% load blog_tags %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block subtitle %}{{ post.title }}{% endblock %}
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 blog-main">
+			{% with comments.count as total_comments %}
+				<article class="blog-post">
+					<header>
+						<div class="lead-image">
+							<img src="{% static "image/single-post.jpg" %}" alt="" class="img-responsive">
+						</div>
+					</header>
+					<div class="body">
+						<h1>{{ post.title }}</h1>
+						<div class="meta">
+							<i class="fa fa-user"></i>{{ post.author }}<i class="fa fa-calendar"></i>{{ post.publish }}<i class="fa fa-comments"></i><span class="data"><a href="#comments">{{ total_comments }} Comments</a></span>
+						</div>
+						{{ post.body|markdown }}
+					</div>
+				</article>
+
+				<aside class="social-icons clearfix">
+					<h3>Share on </h3> 
+					<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="{% url "blog:post_share" post.id %}"><i class="fa fa-google"></i></a>
+				</aside>
+
+				<aside class="comments" id="comments">
+					<hr>
+					
+					
+					<h2><i class="fa fa-comments"></i> {{ total_comments }} Comment{{ total_comments|pluralize }}</h2>
+			{% endwith %}
+					
+					{% for comment in comments %}
+					<article class="comment">
+						<header class="clearfix">
+							<img src="{% static "image/avatar.png" %}" alt="Gakki" class="avatar">
+							<div class="meta">
+								<h3><a href="#">{{ comment.name }}</a></h3>
+								<span class="date">
+									{{ comment.created }}
+								</span>
+								<span class="separator">
+									-
+								</span>
+								
+								<a href="#create-comment" class="reply-link">Reply</a>                
+							</div>
+						</header>
+						 <div class="body">
+						   {{ comment.body|linebreaks }}
+						 </div>
+					</article>
+					{% empty %}
+						<p>There are no comments yet.</p>
+					{% endfor %}
+					<!-- 
+					<article class="comment reply">
+						<header class="clearfix">
+							<img src="img/avatar.png" alt="A Smart Guy" class="avatar">
+							<div class="meta">
+								<h3><a href="#">John Doe</a></h3>
+								<span class="date">
+									24 August 2015
+								</span>
+								<span class="separator">
+									-
+								</span>
+								
+								<a href="#create-comment" class="reply-link">Reply</a>                
+							</div>
+						</header>
+						 <div class="body">
+						   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere sit perspiciatis debitis, vel ducimus praesentium expedita, assumenda ipsum cum corrupti dolorum modi. Rem ipsam similique sapiente obcaecati tenetur beatae voluptatibus.
+						</div>
+					</article>
+					-->     
+				</aside>
+				
+
+				<aside class="create-comment" id="create-comment">
+					<hr>    
+					{% if new_comment %}
+					<h2>Your comment has been added.</h2>
+					{% else %}
+					<h2><i class="fa fa-pencil"></i> Add Comment</h2>
+
+					<form action="." method="post" accept-charset="utf-8">
+						{{ comment_form.as_p }}
+						{% csrf_token %}
+						<div class="buttons clearfix">
+							<button type="submit" class="btn btn-xlarge btn-clean-one">Submit</button>
+						</div>
+					</form>
+					{% endif %}
+				</aside>
+			</div>
+			{% include "blog/sidebar.html"  with similar_posts=similar_posts%}
+		</div>
+	</div>
+{% endblock %}

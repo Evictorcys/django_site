@@ -1,0 +1,42 @@
+{% extends "blog/base.html" %}
+{% load blog_tags %}
+{% load staticfiles %}
+{% block title %}Home{% endblock %}
+{% block subtitle %}Home{% endblock %}
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 blog-main">
+			<div class="row">
+				{% for post in posts %}
+					<div class="col-md-6 col-sm-6">
+						<article class=" blog-teaser">
+							<header>
+								<img src="/static/image/{{ forloop.counter }}.jpg" alt="">
+								<h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+								<span class="meta">{{ post.publish }} , {{ post.author }}</span>
+								<hr>
+							</header>
+                            <!--
+							<div class="body">
+							{{ post.body|markdown|truncatewords_html:30 }}
+							</div>
+							-->
+							<div class="clearfix">
+								<a href="{{ post.get_absolute_url }}" class="btn btn-clean-one">Read more</a>
+							</div>
+						</article>
+					</div>
+				{% endfor %}
+				
+
+			</div>				
+			<div class="paging">
+				{% include "pagination.html" with page=posts  %}
+			</div>
+		</div>
+		
+		{% include "blog/sidebar.html"  %}
+	</div>
+</div>
+{% endblock %}

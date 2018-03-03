@@ -3,14 +3,84 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
 		<title>{% block title %}{% endblock %}</title>
-		<link href="{% static "css/blog.css" %}" rel="stylesheet">
+		
+		<!-- <link href="{% static "css/blog.css" %}" rel="stylesheet"> -->
+		
+		<!-- Bootstrap styles -->
+		<link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+   
+		<!-- Font-Awesome -->
+		<link rel="stylesheet" href="{% static "css/font-awesome/css/font-awesome.min.css" %}">
+
+		<!-- Google Webfonts -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600|PT+Serif:400,400italic' rel='stylesheet' type='text/css'>
+
+		<!-- Styles -->
+		<link rel="stylesheet" href="{% static "css/style.css" %}" id="theme-styles">
 	</head>
 	<body>
-		<div id="content">
+	
+		<header>
+			<div class="widewrapper masthead">
+				<div class="container">
+					<a href="{% url "blog:post_list" %}" id="logo">
+						<img src="{% static "image/Evictor.jpg" %}" alt="clean Blog">
+					</a>
+
+					<div id="mobile-nav-toggle" class="pull-right">
+						<a href="#" data-toggle="collapse" data-target=".clean-nav .navbar-collapse">
+							<i class="fa fa-bars"></i>
+						</a>
+					</div>
+
+					<nav class="pull-right clean-nav">
+						<div class="collapse navbar-collapse">
+							<ul class="nav nav-pills navbar-nav">
+							  
+								<li>
+									<a href="{% url "blog:post_list" %}">Home</a>
+								</li>
+								<li>
+									<a href="{% url "blog:about_me" %}">About</a>
+								</li>
+								<li>
+									<a href="{% url "blog:contact_me" %}">Contact</a>
+								</li>                        
+							</ul>
+						</div>
+					</nav>        
+
+				</div>
+			</div>
+
+			<div class="widewrapper subheader">
+				<div class="container">
+					<div class="clean-breadcrumb">
+						<a href="#">{% block subtitle %}{% endblock %}</a>
+					</div>
+
+					<div class="clean-searchbox">
+						<form action="#" method="get" accept-charset="utf-8">
+							<input class="searchfield" id="searchbox" type="text" placeholder="Search">
+							<button class="searchbutton" type="submit">
+								<i class="fa fa-search"></i>
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</header>
+		
+		<div class="widewrapper main">
+				
 			{% block content %}
 			{% endblock %}
+				
 		</div>
+		<!--
 		<div id="sidebar">
 			<h2>Evictor's blog</h2>
 			<p>This is Evioctor's blog.I've written {% total_posts %} posts so far.</p>
@@ -18,6 +88,45 @@
 			{% show_latest_posts 3 %}
 			<p><a href="{% url "blog:post_feed" %}">Subscribe to my RSS feed</a></p>
 		</div>
+		-->
+		<footer>
+			<div class="widewrapper footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4 footer-widget">
+							<h3> <i class="fa fa-user"></i>About</h3>
+							<p>Hello, My name is Evictor Cai.I am an IT developer focusing on web technology and a machine learning. </p>
+							<p>I graduated from Beijing University of Posts and Telecommunications in 2017.In spare time, I like reading book, surfing internet, watching movie and playing Dota2.</p>
+						</div>
+
+						<div class="col-md-4 footer-widget">
+							<h3> <i class="fa fa-pencil"></i> Recent Post</h3>
+							{% show_latest_posts 5 %}
+						</div>
+
+						<div class="col-md-4 footer-widget">
+							<h3> <i class="fa fa-envelope"></i>Contact Me</h3>
+							
+							<p>The easiest way to contact me about any problems or issues is via email. You can reach me at Mjg1NjUyNzcyOUBxcS5jb20=</p>
+							<p>I will respond to your email as soon as I can,and I will do my best to respond your questions.</p>
+							<div class="footer-widget-icon">
+								<i class="fa fa-facebook"></i><i class="fa fa-twitter"></i><i class="fa fa-google"></i>
+							</div>
+						</div>
+					   
+					</div>
+				</div>
+			</div>
+			<div class="widewrapper copyright">
+					Copyright 2018
+			</div>
+		</footer>
+		
+		<script src="{% static "js/jquery.min.js" %}"></script>
+		<script src="{% static "js/bootstrap.min.js" %}" ></script>
+		<script src="{% static "js/modernizr.js" %}"></script>
+		
+		
 	</body>
 </html>
 

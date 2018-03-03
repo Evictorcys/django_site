@@ -25,7 +25,7 @@ SECRET_KEY = '0gwos73^gwnkj1)$h)-tkoip8e#&5al!u*!tq_e(*jycpfyc#i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.evictor.club']
+ALLOWED_HOSTS = ['www.evictor.club','127.0.0.1']
 
 # Email Config
 EMAIL_HOST = 'smtp.163.com'
@@ -124,7 +124,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

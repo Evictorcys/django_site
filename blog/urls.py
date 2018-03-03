@@ -23,5 +23,7 @@ urlpatterns = [
     re_path(r'^feed/$',
             LatestPostsFeed(),
             name='post_feed'),
+    re_path(r'^about/$', views.about_me,name='about_me'),
+    re_path(r'^contact/$', views.contact_me,name='contact_me'),
 ]
 
